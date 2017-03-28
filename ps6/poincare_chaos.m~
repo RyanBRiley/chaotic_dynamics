@@ -1,3 +1,5 @@
+time_step_multiple = 1;
+
 m = 0.1;
 l = 0.1;
 beta = 0.25;
@@ -5,9 +7,11 @@ alpha = 7.425;
 A = 1.1;
 g = 9.8;
 
-t0 = 0.8463;
-h = 0.005;
-n = 100000;
+%t0 = 0.8463;
+t0 = (2*pi)/(sqrt(g/l)*0.75);
+h = 0.005 * time_step_multiple;
+%n = 100000;
+n = round((100000 / time_step_multiple), 0);
 x0 = [0.01; 0];
 
 %x_prime = @(t, x) t + x + 1;
@@ -20,8 +24,6 @@ function output = runge_kutta4( t0, h, n, x0, x_prime )
     temporal_matrix = zeros(1, n);
     output(:,1) = x0;
     t = t0; 
-    %theta = zeros(n);
-    %omega = zeros(n);
     for i = 1:n
         temporal_matrix(i) = t;
         k1 = h * x_prime(t, output(:,i));
@@ -31,25 +33,11 @@ function output = runge_kutta4( t0, h, n, x0, x_prime )
         output(:,i+1) = output(:,i) + (1/6) * (k1 + 2*k2 + 2*k3 + k4);
         t = t + h;
     end
-    pcare(temporal_matrix, output, t0);
-    %plot(theta, omega)
-
+    plot_title = sprintf('Temporal Poincare T=%.3f Timestep=%.3f',t0, h);
+    pcare_interp(temporal_matrix, output, t0, plot_title);
 end
 
-function pcare( temporal_matrix, x, t0)
-    figure
-    hold on;
-    mult = 1;
-    for i = 1:numel(temporal_matrix)
-        if temporal_matrix(i) >= mult*t0
-            mult = mult + 1;
-            plot(mod(x(1,i),2*pi), x(2,i),'.');
-        end
-    end
-    xlabel('theta')
-    ylabel('omega')
-    title('Temporal Poincare Section with A')
-end
+
 
             
             
