@@ -1,0 +1,10 @@
+data = importdata('ps8data/data1');
+theta = data(:,1);
+t = data(:,2);
+srate = 20;
+omega = zeros(1, round(numel(theta)/srate, 0));
+numel(omega)
+
+for i=1:srate:numel(theta)
+    omega(i) = theta(
+    
