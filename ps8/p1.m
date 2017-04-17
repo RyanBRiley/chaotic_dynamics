@@ -1,6 +1,6 @@
 data = importdata('ps8data/data1');
 theta = data(:,1);
-t = data(:,2);
+time = data(:,2);
 srate = 100;
 omega = zeros(1, numel(theta));
 
