@@ -1,6 +1,0 @@
-function z = n_neighbor(x, index)
-   d_min = intmax('int64');
-   for i = index+50:length(x)
-       d_cur = norm(
-   z = point; 
-end

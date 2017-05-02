@@ -1,9 +1,8 @@
-function [time, output] = runge_kutta4( t0, h, n, x0, x_prime )
+function output = runge_kutta4( t0, h, n, x0, x_prime )
 % A simple implementation of 4th order Runge-Kutta ODE solver
 
     output(:,1) = x0;
-    t = t0;
-    time = t0;
+    t = t0; 
     %theta = zeros(n);
     %omega = zeros(n);
     for i = 1:n
