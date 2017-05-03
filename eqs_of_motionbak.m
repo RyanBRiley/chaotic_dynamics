@@ -1,4 +1,5 @@
 function output = eqs_of_motion(x)
+    x
     m1 = 0.5;
     m2 = 0.5;
     G = 1;
